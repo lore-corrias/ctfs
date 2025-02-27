@@ -36,9 +36,9 @@ RUN apt update && apt install -y wget gpg \
 COPY --from=builder /usr/local /usr/local
 
 # Copy setup scripts and package list
-COPY ../scripts/setup-burpsuite.sh /
-COPY ../scripts/install-eza.sh /
-COPY ../packages/default.packages /
+COPY ./ctfbox/scripts/setup-burpsuite.sh /
+COPY ./ctfbox/scripts/install-eza.sh /
+COPY ./ctfbox/packages/default.packages /
 
 # Run the setup scripts
 RUN chmod +x /setup-burpsuite.sh /install-eza.sh \

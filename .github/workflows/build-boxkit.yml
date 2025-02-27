@@ -51,7 +51,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: |
-            ./ContainerFiles/${{ matrix.containerfile }}
+            ./ctfbox/ContainerFiles/${{ matrix.containerfile }}
           image: ${{ matrix.containerfile }}
           tags: ${{ env.IMAGE_TAGS }}
           labels: ${{ steps.meta.outputs.labels }}
