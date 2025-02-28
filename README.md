@@ -1,3 +1,26 @@
+# CTFs
+
+Inside this repo I store writeups of CTF challenges that I have completed during competitions. You can find the MD files
+inside the "`writeups`" directory.
+
+I also keep track of my environment for playing CTF, which consists of a [distrobox](https://distrobox.it/) container with 
+all the necessary tools for web challenges already installed (like Burp, etc.)
+
+If you want to use my environment, you can assemble a distrobox using the `ctfbox.ini` file inside this repo:
+
+```sh
+distrobox-assemble create --file https://raw.githubusercontent.com/lore-corrias/ctfs/refs/heads/main/ctfbox.ini
+```
+
+and then use it with
+
+```sh
+distrobox enter ctfbox
+```
+
+<details>
+<summary>boxkit original MD</summary>
+
 # boxkit
 
 ## What is boxkit ?
@@ -119,3 +142,5 @@ These images are signed with sisgstore's [cosign](https://docs.sigstore.dev/quic
 If you're forking this repo you should [read the docs](https://docs.github.com/en/actions/security-guides/encrypted-secrets) on keeping secrets in github. You need to [generate a new keypair](https://docs.sigstore.dev/cosign/key_management/signing_with_self-managed_keys/) with cosign. The public key can be in your public repo (your users need it to check the signatures), and you can paste the private key in Settings -> Secrets -> Actions.
 
 ![Alt](https://repobeats.axiom.co/api/embed/7c5f037d792c6deb1946e5bc040f64a0fc8abeab.svg "Repobeats analytics image")
+
+</details>
