@@ -7,8 +7,10 @@ on:
   push:
     branches:
       - main
-    paths-ignore: # don't rebuild on documentation change
+    paths-ignore:
       - '**.md'
+      - 'writeups/*'
+      - 'ctfbox.ini'
   schedule:
     - cron: '0 0 * * TUE'
 
@@ -29,7 +31,6 @@ jobs:
       matrix:
         containerfile: 
           - ctfbox
-       #- fedora-example # Included as an example to demonstrate multi-image builds, uncomment to build the fedora-example container too
     steps:
       # Clone code to runner
       - name: Checkout
