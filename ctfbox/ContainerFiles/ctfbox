@@ -38,13 +38,17 @@ COPY --from=builder /usr/local /usr/local
 # Copy setup scripts and package list
 COPY ./ctfbox/scripts/setup-burpsuite.sh /
 COPY ./ctfbox/scripts/install-eza.sh /
+COPY ./ctfbox/scripts/install-packages.sh /
+COPY ./ctfbox/scripts/symlinks.sh /
 COPY ./ctfbox/packages/default.packages /
 
 # Run the setup scripts
-RUN chmod +x /setup-burpsuite.sh /install-eza.sh \
+RUN chmod +x /setup-burpsuite.sh /install-eza.sh /install-packages.sh /symlinks.sh  \
     && /setup-burpsuite.sh \
     && /install-eza.sh \
-    && rm /setup-burpsuite.sh /install-eza.sh /default.packages
+    && /install-packages.sh \
+    && /symlinks.sh \
+    && rm /setup-burpsuite.sh /install-eza.sh /install-packages.sh /default.packages /symlinks.sh
 
 # Cleanup commands
 RUN rm -rf /etc/skel/.kde /etc/skel/.local/share/konsole
