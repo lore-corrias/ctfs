@@ -1,4 +1,4 @@
-name: build-boxkit
+name: build-ctfbox
 on:
   workflow_dispatch: # allow manually triggering builds
   pull_request:
