@@ -2,48 +2,41 @@ FROM kalilinux/kali-rolling AS builder
 
 # Install build dependencies
 RUN apt update && apt install -y \
-    curl git cmake ninja-build gettext \
-    libtool libtool-bin autoconf automake \
-    g++ pkg-config unzip doxygen \
-    && rm -rf /var/lib/apt/lists/*
+  curl git cmake ninja-build gettext \
+  libtool libtool-bin autoconf automake \
+  g++ pkg-config unzip doxygen \
+  && rm -rf /var/lib/apt/lists/*
 
 # Clone and build Neovim
 WORKDIR /usr/src
 RUN git clone https://github.com/neovim/neovim.git \
-    && cd neovim \
-    && git checkout stable \
-    && make CMAKE_BUILD_TYPE=RelWithDebInfo \
-    && make install
+  && cd neovim \
+  && git checkout stable \
+  && make CMAKE_BUILD_TYPE=RelWithDebInfo \
+  && make install
 
 # Final image
 FROM kalilinux/kali-rolling
 
 LABEL com.github.containers.toolbox="true" \
-      usage="Use this image with distrobox / podman to have a working environment for solving CTF challenges" \
-      summary="CTFs environment for Web challenges" \
-      maintainer="lore-corrias"
+  usage="Use this image with distrobox / podman to have a working environment for solving CTF challenges" \
+  summary="CTFs environment for Web challenges" \
+  maintainer="lore-corrias"
 
 # Install runtime dependencies
 RUN apt update && apt install -y wget gpg \
-    && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/*
 
 # Copy Neovim from builder stage
 COPY --from=builder /usr/local /usr/local
 
 # Copy setup scripts and package list
-COPY ./ctfbox/scripts/setup-burpsuite.sh /
-COPY ./ctfbox/scripts/add-repositories.sh /
-COPY ./ctfbox/scripts/install-packages.sh /
-COPY ./ctfbox/scripts/symlinks.sh /
-COPY ./ctfbox/packages/default.packages /
+COPY ./ctfbox/scripts/ /scripts
 
 # Run the setup scripts
-RUN chmod +x /setup-burpsuite.sh /add-repositories.sh /install-packages.sh /symlinks.sh  \
-    && /setup-burpsuite.sh \
-    && /add-repositories.sh \
-    && /symlinks.sh \
-    && /install-packages.sh \
-    && rm /setup-burpsuite.sh /add-repositories.sh /install-packages.sh /default.packages /symlinks.sh
+RUN chmod +x /scripts/run-scripts.sh \
+  && /scrpits/run-scripts.sh \
+  && rm -rf /scripts
 
 # Cleanup commands
 RUN rm -rf /etc/skel/.kde /etc/skel/.local/share/konsole

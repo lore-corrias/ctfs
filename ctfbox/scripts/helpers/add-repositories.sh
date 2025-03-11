@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ue
+
 ## Eza
 mkdir -p /etc/apt/keyrings &&
   wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | gpg --dearmor -o /etc/apt/keyrings/gierens.gpg &&
@@ -16,10 +18,10 @@ curl https://repo.anaconda.com/pkgs/misc/gpgkeys/anaconda.asc | gpg --dearmor >c
   echo "deb [arch=amd64 signed-by=/usr/share/keyrings/conda-archive-keyring.gpg] https://repo.anaconda.com/pkgs/misc/debrepo/conda stable main" | tee /etc/apt/sources.list.d/conda.list
 
 ## Ngrok
-curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
-  | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
-  && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
-  | tee /etc/apt/sources.list.d/ngrok.list
+curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc |
+  tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null &&
+  echo "deb https://ngrok-agent.s3.amazonaws.com buster main" |
+  tee /etc/apt/sources.list.d/ngrok.list
 
 # Update apt
 apt update -y

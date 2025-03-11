@@ -1,0 +1,45 @@
+name: web
+channels:
+  - defaults
+dependencies:
+  - _libgcc_mutex
+  - _openmp_mutex
+  - blinker
+  - brotli-python
+  - bzip2
+  - ca-certificates
+  - certifi
+  - charset-normalizer
+  - click
+  - expat
+  - flask
+  - idna
+  - itsdangerous
+  - jinja2
+  - ld_impl_linux-64
+  - libffi
+  - libgcc-ng
+  - libgomp
+  - libmpdec
+  - libstdcxx-ng
+  - libuuid
+  - markupsafe
+  - ncurses
+  - openssl
+  - pip
+  - pypdf
+  - pysocks
+  - python
+  - python_abi
+  - readline
+  - requests
+  - setuptools
+  - sqlite
+  - tk
+  - tzdata
+  - urllib3
+  - werkzeug
+  - wheel
+  - xz
+  - zlib
+prefix: /var/home/lore/.conda/envs/web

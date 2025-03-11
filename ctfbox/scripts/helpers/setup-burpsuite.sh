@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ue
+
 curl "https://raw.githubusercontent.com/MeLThRoX/burp-big-sur-icons/refs/heads/main/src/export/dark.png" -o /usr/share/burpsuite/icon.png
 
 mkdir -p /usr/share/applications
